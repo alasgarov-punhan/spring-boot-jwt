@@ -26,7 +26,6 @@ public class AuthConroller {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-
             return ResponseEntity.ok(tokenManager.generateToken(loginRequest.getUsername()));
         } catch (Exception e) {
             throw e;
