@@ -21,6 +21,7 @@ public class UserDetailsService implements org.springframework.security.core.use
     private Logger logger = LoggerFactory.getLogger(UserDetailsService.class);
 
     private final UserService userService;
+
     public UserDetailsService(UserService userService) {
         this.userService = userService;
     }
@@ -45,7 +46,7 @@ public class UserDetailsService implements org.springframework.security.core.use
         if (userService.checkExistence(username)) {
             logger.info("hello");
             logger.info("hello 2 = ", userService.getUser(username).getPassword().toString());
-            return new User(username, passwordEncoder.encode(userService.getUser(username).getPassword().toString()) , new ArrayList<>());
+            return new User(username, passwordEncoder.encode(userService.getUser(username).getPassword().toString()), new ArrayList<>());
         }
 /*        if (users.containsKey(username)) {
             logger.info("hello");

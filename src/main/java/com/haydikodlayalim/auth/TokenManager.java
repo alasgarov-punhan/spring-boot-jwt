@@ -4,17 +4,20 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+
 import java.security.Key;
 import java.util.Date;
+
 import org.springframework.stereotype.Service;
 
 @Service
 public class TokenManager {
 
-    private static final int validity = 5 * 60 * 1000;
+    private static final int validity = 1 * 60 * 1000;
     Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     public String generateToken(String username) {
+        //Create  JSON Web Signature (JWS)
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuer("www.haydikodlayalim.com")
@@ -42,7 +45,8 @@ public class TokenManager {
     }
 
     private Claims getClaims(String token) {
-        return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
+        return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+//        return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
     }
 
 }

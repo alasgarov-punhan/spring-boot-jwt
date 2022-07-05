@@ -22,15 +22,15 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public boolean checkExistence(String userName){
+    public boolean checkExistence(String userName) {
         return userRepository.existsByUserName(userName);
     }
 
-    public User getUser(String userName){
+    public User getUser(String userName) {
         return userRepository.findByUserName(userName);
     }
 
-    public String returnUserPassword(String userName){
+    public String returnUserPassword(String userName) {
         return getUser(userName).getPassword().toString();
     }
 
